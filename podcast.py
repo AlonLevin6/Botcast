@@ -26,13 +26,13 @@ load_dotenv()
 
 VOICE = "en-US-AndrewNeural"  # natural-sounding English voice, free via edge-tts
 MODEL = "gemini-3.6-flash"
-TARGET_WORD_COUNT = 2000  # roughly 15 minutes of spoken audio
+TARGET_WORD_COUNT = 600  # shortened while we work out TTS turnaround time; target is 2000+
 
 SYSTEM_PROMPT = f"""You are a professional podcast scriptwriter. Write an engaging,
 well-structured spoken-word script on the topic the user gives you.
 
 Rules:
-- Length: approximately {TARGET_WORD_COUNT} words (about 15 minutes spoken aloud).
+- Length: approximately {TARGET_WORD_COUNT} words.
 - Write in plain, natural spoken English - no markdown, no headers, no bullet points,
   no stage directions, nothing but the words to be read aloud.
 - Open with a short hook, cover the topic with a clear narrative arc, and close with
