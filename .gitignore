@@ -1,5 +1,6 @@
 venv/
 *.mp3
 script_*.txt
+podcasts/
 __pycache__/
 .env

@@ -1,3 +1,4 @@
 google-genai
 edge-tts
 python-dotenv
+python-telegram-bot
