@@ -18,12 +18,14 @@ import sys
 from datetime import datetime
 
 import edge_tts
-import google.generativeai as genai
 from dotenv import load_dotenv
+from google import genai
+from google.genai import types
 
 load_dotenv()
 
 VOICE = "en-US-AndrewNeural"  # natural-sounding English voice, free via edge-tts
+MODEL = "gemini-3.6-flash"
 TARGET_WORD_COUNT = 2000  # roughly 15 minutes of spoken audio
 
 SYSTEM_PROMPT = f"""You are a professional podcast scriptwriter. Write an engaging,
@@ -43,14 +45,14 @@ def generate_script(topic: str) -> str:
     if not api_key:
         sys.exit("Missing GEMINI_API_KEY environment variable.")
 
-    genai.configure(api_key=api_key)
-    model = genai.GenerativeModel(
-        model_name="gemini-1.5-flash",
-        system_instruction=SYSTEM_PROMPT,
-    )
+    client = genai.Client(api_key=api_key)
 
     print("Writing script...")
-    response = model.generate_content(f"Topic: {topic}")
+    response = client.models.generate_content(
+        model=MODEL,
+        contents=f"Topic: {topic}",
+        config=types.GenerateContentConfig(system_instruction=SYSTEM_PROMPT),
+    )
     return response.text.strip()
 
 
