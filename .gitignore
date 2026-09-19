@@ -1,0 +1,5 @@
+venv/
+*.mp3
+script_*.txt
+__pycache__/
+.env
